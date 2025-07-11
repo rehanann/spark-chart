@@ -23,7 +23,7 @@ runAsJob: false
 
 image:
   repository: rehanann/spark-py
-  tag: 345-2
+  tag: 3.4.0-extended
   pullPolicy: Always
   command: ["/bin/bash"]
   args: []
@@ -40,6 +40,20 @@ envVars:
 # sparkconf:
 #  spark.sql.maxPlanStringLength: "2147483632"
 sparkConf:
+  # spark.eventLog.enabled: true
+  # spark.eventLog.dir: s3a://historyservice/logs
+  spark.hadoop.fs.s3a.endpoint: http://minio.default.svc.cluster.local:9000
+  spark.hadoop.fs.s3a.access.key: bU0c4naTz98KynxEsHf1
+  spark.hadoop.fs.s3a.secret.key: dNOkRi7cbUsw0ZHnN9coosKO0iyu21XJpieAayZd
+  spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+  spark.hadoop.fs.s3a.path.style.access: true
+  spark.hadoop.fs.s3a.connection.ssl.enabled: false
+  spark.hadoop.fs.s3n.impl: org.apache.hadoop.fs.s3native.NativeS3FileSystem
+  spark.hadoop.fs.s3a.experimental.fadvise: random
+  spark.sql.sources.partitionOverwriteMode: static
+  spark.sql.sources.partitionColumnTypeInference.enabled: false
+  spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version: 2
+  spark.hadoop.fs.s3a.bucket.all.committer.magic.enabled: true
 
 pyspark:
   python: /usr/bin/python3
@@ -108,3 +122,15 @@ sparkLogs: ERROR
 
 # Below settings control spark 3.5 (log4j2) log level values can be: error, warn, info, debug.
 spark35LogLevel: error
+
+shared:
+  directory: /opt/spark/work-dir/shared
+
+eventLogs:
+  # spark.eventLog.enabled
+  enabled: true
+  # spark.eventLog.dir
+  #  Example for shared PVC
+  #  directory: /opt/spark/work-dir/shared/history
+  # directory: /tmp/spark-events
+  directory: s3a://historyservice/logs

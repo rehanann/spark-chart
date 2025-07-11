@@ -125,10 +125,6 @@ b-{{ .Release.Namespace }}-{{- required "A serviceDirectory.component is require
         path: spark-defaults.conf
       - key: exec_pod_template.yaml
         path: exec_pod_template.yaml
-      - key: core-site.xml
-        path: core-site.xml
-      - key: hdfs-site.xml
-        path: hdfs-site.xml
 {{- end -}}
 
 {{/* Volume Mounts*/}}
@@ -510,3 +506,15 @@ job.testid: {{.Values.test.jobid | quote}}
 {{printf ""}}
 {{- end}}
 {{- end}}
+
+
+{{- define "spark.pod-volumeMounts-spark-event-logs-dir" -}}
+- name: shared-storage
+  mountPath: {{ .Values.shared.directory }}
+{{- end -}}
+
+{{- define "spark.pod-volumes-spark-event-logs-dir" -}}
+- name: shared-storage
+  persistentVolumeClaim:
+    claimName: shared-pvc
+{{- end -}}

@@ -67,8 +67,9 @@ spec:
           volumeMounts:
           {{- include "spark.pod-volumeMounts-spark-defaults-conf" . | nindent 10 }}
           {{- include "spark.pod-volumeMounts-spark-exec-template" . | nindent 10 }}
-          {{- include "spark.pod-volumeMounts-core-site-template" . | nindent 10 }}
-          {{- include "spark.pod-volumeMounts-hdfs-site-template" . | nindent 10 }}
+          {{- include "spark.pod-volumeMounts-spark-event-logs-dir" . | nindent 10 }}
+
       volumes:
       {{- include "spark.merged-configmap-volume" . | nindent 6 }}
-
+      {{- include "spark.pod-volumes-spark-event-logs-dir" . | nindent 6 }}
+      
