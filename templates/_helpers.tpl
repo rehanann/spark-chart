@@ -12,15 +12,15 @@
 */}}
 
 {{- define "spark.service-account-name" -}}
-b-{{ .Release.Namespace }}-{{- required "A serviceDirectory.component is required" .Values.serviceDirectory.component }}
+b-{{ .Release.Namespace }}-{{- required "A project.component is required" .Values.project.component }}
 {{- end -}}
 
 {{- define "spark.name" -}}
-{{- required "A serviceDirectory.component is required" .Values.serviceDirectory.component }}-{{- .Release.Name -}}
+{{- required "A project.component is required" .Values.project.component }}-{{- .Release.Name -}}
 {{- end -}}
 
 {{- define "hash-suffix" -}}
-{{- printf "%s-%s" .Values.serviceDirectory.component .Release.Name | sha256sum | trunc 6 -}}
+{{- printf "%s-%s" .Values.project.component .Release.Name | sha256sum | trunc 6 -}}
 {{- end -}}
 
 {{- define "spark.pod-name" -}}
@@ -169,7 +169,7 @@ b-{{ .Release.Namespace }}-{{- required "A serviceDirectory.component is require
 {{- define "spark.commonLabels" -}}
 {{ include "spark.selectorLabels" . }}
 bigdata.instance: {{ include "spark.pod-name" . }}
-service-directory.service: {{ .Values.serviceDirectory.component | default "bigdata"}}
+service-directory.service: {{ .Values.project.component | default "bigdata"}}
 helm.sh/chart: {{ include "spark.chart" . }}
 app.kubernetes.io/name: {{ include "spark.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
@@ -506,15 +506,3 @@ job.testid: {{.Values.test.jobid | quote}}
 {{printf ""}}
 {{- end}}
 {{- end}}
-
-
-{{- define "spark.pod-volumeMounts-spark-event-logs-dir" -}}
-- name: shared-storage
-  mountPath: {{ .Values.shared.directory }}
-{{- end -}}
-
-{{- define "spark.pod-volumes-spark-event-logs-dir" -}}
-- name: shared-storage
-  persistentVolumeClaim:
-    claimName: shared-pvc
-{{- end -}}

@@ -8,9 +8,10 @@
 
 replicaCount: 1
 
-serviceDirectory:
+project:
   # default service/component name, free to change
-  component: bigdata
+  component: gdt
+  namespace: gdt
 
 applicationType: workflow
 
@@ -123,8 +124,11 @@ sparkLogs: ERROR
 # Below settings control spark 3.5 (log4j2) log level values can be: error, warn, info, debug.
 spark35LogLevel: error
 
-shared:
-  directory: /opt/spark/work-dir/shared
+sharedVolume:
+  enabled: true
+  useExisting: true
+  mountPath: /opt/spark/work-dir/shared
+  existingPvcName: gdt-shared
 
 eventLogs:
   # spark.eventLog.enabled
