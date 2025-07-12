@@ -138,3 +138,5 @@ eventLogs:
   #  directory: /opt/spark/work-dir/shared/history
   # directory: /tmp/spark-events
   directory: s3a://historyservice/logs
+
+runAsJob: false
