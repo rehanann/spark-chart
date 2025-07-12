@@ -9,13 +9,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "spark.selectorLabels" . | indent 6 }}
-      {{- include "test-label-for-driver" . | indent 6 }}
+  backoffLimit: 0
   template:
     metadata:
       labels:
-        app: {{ include "spark.name" . }}
-        {{- include "spark.commonLabels" . | indent 8 }}
         {{- include "spark.selectorLabels" . | indent 8 }}
         {{- include "test-label-for-driver" . | indent 8 }}
         spark.driver: {{ include "spark.name" . }}
@@ -23,6 +20,7 @@ spec:
     spec:
       hostname: {{ include "spark.name" . }}
       serviceAccountName: default
+      restartPolicy: Never
       containers:
         - name: app
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}

@@ -20,14 +20,14 @@ appLabels:
   #   key: value
   custom: {}
 
-runAsJob: false
-
 image:
   repository: rehanann/spark-py
   tag: 3.4.0-extended
   pullPolicy: Always
   command: ["/bin/bash"]
-  args: []
+  # args: []
+  args:
+    ["-c", "/opt/spark/bin/spark-submit /opt/spark/work-dir/shared/test2.py"]
 #  command: ["/opt/spark/bin/spark-submit"]
 # environment variables
 envVars:
@@ -139,4 +139,4 @@ eventLogs:
   # directory: /tmp/spark-events
   directory: s3a://historyservice/logs
 
-runAsJob: false
+runAsJob: true
