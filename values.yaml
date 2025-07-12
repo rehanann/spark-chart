@@ -25,9 +25,9 @@ image:
   tag: 3.4.0-extended
   pullPolicy: Always
   command: ["/bin/bash"]
-  # args: []
-  args:
-    ["-c", "/opt/spark/bin/spark-submit /opt/spark/work-dir/shared/test2.py"]
+  args: []
+  # args:
+  #   ["-c", "/opt/spark/bin/spark-submit /opt/spark/work-dir/shared/test2.py"]
 #  command: ["/opt/spark/bin/spark-submit"]
 # environment variables
 envVars:
@@ -139,4 +139,4 @@ eventLogs:
   # directory: /tmp/spark-events
   directory: s3a://historyservice/logs
 
-runAsJob: true
+runAsJob: false
