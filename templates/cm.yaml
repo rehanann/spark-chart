@@ -13,7 +13,7 @@ data:
     spark.driver.host={{ include "spark.name" . }}
     spark.driver.port={{ .Values.services.driver.port }}
     spark.kubernetes.executor.podNamePrefix={{ include "spark.pod-name" . }}
-    # WKFM Template backward compatible as per version 3.19.02.
+    
     spark.driver.cores={{ .Values.driver.cores }}
     spark.driver.memory={{ .Values.driver.memory }}
     spark.kubernetes.driver.request.cores={{ .Values.driver.request.cores }}
@@ -23,7 +23,7 @@ data:
     spark.executor.memoryOverhead={{ .Values.executor.memoryOverhead }}
     spark.kubernetes.executor.request.cores={{ .Values.executor.request.cores }}
     spark.kubernetes.executor.limit.cores={{ .Values.executor.limit.cores }}
-    # End WKFM Template backward compatible as per version 3.19.02.
+    
     spark.kubernetes.allocation.batch.size={{ .Values.allocationBatchSize }}
     spark.kubernetes.authenticate.driver.serviceAccountName: default
     spark.kubernetes.authenticate.executor.serviceAccountName: default
