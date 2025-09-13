@@ -69,6 +69,8 @@ data:
     spark.jars.ivy=/opt/spark/work-dir/.ivy2
     spark.jars.repositories=https://repo.maven.apache.org/maven2
     
+    # history server / event logs
+    
     
     spark.eventLog.enabled={{.Values.eventLogs.enabled}}
     spark.eventLog.dir={{.Values.eventLogs.directory}}

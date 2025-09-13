@@ -156,6 +156,7 @@ b-{{ .Release.Namespace }}-{{- required "A project.component is required" .Value
 {{- define "spark.pod-volumeMounts-shared" -}}
 - name: shared
   mountPath: {{ .Values.sharedVolume.mountPath }}
+  readOnly: false
 {{- end -}}
 
 {{- define "spark.pod-volumeMounts-spark-metric-config" -}}
