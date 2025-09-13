@@ -21,3 +21,8 @@
 .idea/
 *.tmproj
 .vscode/
+install-values*
+.gitignore
+*.py
+__pycache__/
+*.log
