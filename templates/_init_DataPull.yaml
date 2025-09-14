@@ -1,0 +1,17 @@
+{{- define "spark.s3InitContainer" }}
+- name: s3-init
+  image: {{ .Values.sidecars.s3InitContainer.image }}
+  imagePullPolicy: IfNotPresent
+  command: {{- toYaml .Values.sidecars.s3InitContainer.command | nindent 6 }}
+  args: {{- toYaml .Values.sidecars.s3InitContainer.args | nindent 6 }}
+  env:
+  {{- range .Values.sidecars.s3InitContainer.env }}
+    - name: {{ .name }}
+      valueFrom:
+        secretKeyRef:
+          name: {{ .secret }}
+          key: {{ .key }}
+  {{- end }}
+  volumeMounts:
+    {{- include "spark.pod-volumeMounts-shared" . | nindent 4 }}
+{{- end }}

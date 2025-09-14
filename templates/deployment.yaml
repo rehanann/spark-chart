@@ -26,34 +26,12 @@ spec:
       securityContext:
         fsGroup: 185
       initContainers:
-        - name: git-init
-          image: rehanann/git-pull:v1.0
-          imagePullPolicy: IfNotPresent
-          command: ["/bin/sh", "-c"]
-          args: 
-            - |
-              cd /opt/spark/work-dir/shared/ && \
-              rm -rf pyspark && \
-              git clone https://${GIT_PULL_USERNAME}:${GIT_PULL_PASSWORD}@${GIT_REPO_URL} pyspark
-          env:
-            - name: GIT_PULL_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: git-pull-secret
-                  key: git-username
-            - name: GIT_PULL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: git-pull-secret
-                  key: git-password
-            - name: GIT_REPO_URL
-              valueFrom:
-                secretKeyRef:
-                  name: git-pull-secret
-                  key: git-repo-url
-          volumeMounts:
-            {{- include "spark.pod-volumeMounts-shared" . | nindent 10 }}
-
+        {{- if .Values.sidecars.s3InitContainer.enabled }}
+        {{- include "spark.s3InitContainer" . | nindent 8 }}
+        {{- end }}
+        {{- if .Values.sidecars.gitInitContainer.enabled }}
+        {{- include "spark.gitInitContainer" . | nindent 8 }}
+        {{- end }}
       containers:
         - name: app
           securityContext:

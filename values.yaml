@@ -13,8 +13,6 @@ project:
   component: gdt
   namespace: gdt
 
-applicationType: workflow
-
 appLabels:
   # custom:
   #   key: value
@@ -35,6 +33,36 @@ envVars:
     SPARK_LOG_DIR: /opt/spark/work-dir
   executor:
     SPARK_LOG_DIR: /opt/spark/work-dir
+
+sidecars:
+  gitInitContainer:
+    enabled: false
+    image: rehanann/git-pull:v1.0
+    env:
+      - name: GIT_PULL_USERNAME
+        secret: git-pull-secret
+        key: git-username
+      - name: GIT_PULL_PASSWORD
+        secret: git-pull-secret
+        key: git-password
+      - name: GIT_REPO_URL
+        secret: git-pull-secret
+        key: git-repo-url
+  s3InitContainer:
+    enabled: false
+    image: rehanann/pull-data-s3:v1.0
+    command: ["/bin/bash", "-c"]
+    args:
+      - |
+        echo "Pulling data from S3..."
+        echo "Data pull from S3 completed."
+    env:
+      - name: MINIO_USERNAME
+        secret: minio-secret
+        key: username
+      - name: MINIO_PASSWORD
+        secret: minio-secret
+        key: password
 
 # This allow to add any required key values to spark configuration, unless it should not duplicated.
 # e.g.
