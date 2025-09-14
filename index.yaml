@@ -3,7 +3,17 @@ entries:
   spark:
   - apiVersion: v2
     appVersion: 3.4.5
-    created: "2025-09-14T09:53:40.807001+01:00"
+    created: "2025-09-14T13:40:29.083596+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 5718b0a22bb57e41f253cf39a7413f851d6714eaadb799756ae11d06090d621c
+    name: spark
+    type: application
+    urls:
+    - https://rehanann.github.io/spark-chart/spark-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 3.4.5
+    created: "2025-09-14T13:40:29.082811+01:00"
     description: A Helm chart for Kubernetes
     digest: 753665cfc4501234246194cf7f96ba55bc356ff9edae6a987033227db79c18b3
     name: spark
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://rehanann.github.io/spark-chart/spark-0.3.0.tgz
     version: 0.3.0
-generated: "2025-09-14T09:53:40.806283+01:00"
+generated: "2025-09-14T13:40:29.082108+01:00"
