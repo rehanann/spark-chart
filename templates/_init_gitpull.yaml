@@ -1,0 +1,21 @@
+{{- define "spark.gitInitContainer" }}
+- name: git-init
+  image: {{ .Values.sidecars.gitInitContainer.image }}
+  imagePullPolicy: IfNotPresent
+  command: ["/bin/sh", "-c"]
+  args:
+    - |
+      cd /opt/spark/work-dir/shared/ && \
+      rm -rf pyspark && \
+      git clone https://${GIT_PULL_USERNAME}:${GIT_PULL_PASSWORD}@${GIT_REPO_URL} pyspark
+  env:
+  {{- range .Values.sidecars.gitInitContainer.env }}
+    - name: {{ .name }}
+      valueFrom:
+        secretKeyRef:
+          name: {{ .secret }}
+          key: {{ .key }}
+  {{- end }}
+  volumeMounts:
+    {{- include "spark.pod-volumeMounts-shared" . | nindent 4 }}
+{{- end }}
