@@ -3,7 +3,7 @@ entries:
   spark:
   - apiVersion: v2
     appVersion: 3.4.5
-    created: "2025-09-14T09:49:57.296356+01:00"
+    created: "2025-09-14T09:53:40.807001+01:00"
     description: A Helm chart for Kubernetes
     digest: 753665cfc4501234246194cf7f96ba55bc356ff9edae6a987033227db79c18b3
     name: spark
@@ -11,4 +11,4 @@ entries:
     urls:
     - https://rehanann.github.io/spark-chart/spark-0.3.0.tgz
     version: 0.3.0
-generated: "2025-09-14T09:49:57.294771+01:00"
+generated: "2025-09-14T09:53:40.806283+01:00"
