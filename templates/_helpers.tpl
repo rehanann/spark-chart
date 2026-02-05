@@ -11,17 +11,30 @@
     Names standartization
 */}}
 
-{{- define "spark.service-account-name" -}}
-b-{{ .Release.Namespace }}-{{- required "A project.component is required" .Values.project.component }}
+{{- define "spark.component" -}}
+{{- $component := required "A project.component is required" .Values.project.component -}}
+{{- if gt (len $component) 12 -}}
+{{- fail (printf "project.component length (%d) exceeds 8: %s" (len $component) $component) -}}
 {{- end -}}
+{{- $component -}}
+{{- end -}}
+
+{{- define "spark.service-account-name" -}}
+b-{{ .Release.Namespace }}-{{ include "spark.component" . }}
+{{- end -}}
+
 
 {{- define "spark.name" -}}
-{{- required "A project.component is required" .Values.project.component }}-{{- .Release.Name -}}
+{{- include "spark.component" . }}-{{- .Release.Name -}}
 {{- end -}}
 
+
+
 {{- define "hash-suffix" -}}
-{{- printf "%s-%s" .Values.project.component .Release.Name | sha256sum | trunc 6 -}}
+{{- printf "%s-%s" (include "spark.component" .) .Release.Name | sha256sum | trunc 6 -}}
 {{- end -}}
+
+
 
 {{- define "spark.pod-name" -}}
 {{- /* We are trying to limit pod name to have no more then 63 characters */ -}}
@@ -31,6 +44,7 @@ b-{{ .Release.Namespace }}-{{- required "A project.component is required" .Value
 {{- /* For job, pod would only add '-' and 5 characters. */ -}}
 {{- $nameLimit := 57 -}}
 {{- end }}
+
 
 {{- $podName := include "spark.name" . -}}
 {{- if gt (len $podName) $nameLimit -}}

@@ -9,7 +9,7 @@
 replicaCount: 1
 
 project:
-  # default service/component name, free to change
+  # component name, free to change. Component name must not exceed within 12 character length. the restriction is already in placed from helpers.tlp.
   component: gdt
   namespace: gdt
 
