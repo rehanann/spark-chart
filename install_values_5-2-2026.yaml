@@ -1,0 +1,77 @@
+runAsJob: true
+
+eventLogs:
+  enabled: true
+  directory: s3a://historyserver/logs
+
+image:
+  command: ["/bin/bash"]
+  # args:
+  #   [
+  #     "-c",
+  #     "/opt/spark/bin/spark-submit /opt/spark/work-dir/shared/test.py",
+  #   ]
+
+project:
+  # default service/component name, free to change
+  component: fraud
+  namespace: hsz-bigdata1-test
+
+sharedVolume:
+  enabled: true
+  existingPvcName: bigdata-shared
+
+driver:
+  cores: 1
+  memory: 1g
+  limit:
+    cores: 1
+  request:
+    cores: 1
+executor:
+  cores: 1
+  memory: 1g
+  memoryOverhead: 1g
+  request:
+    cores: 1
+  limit:
+    cores: 1
+
+resources:
+  limits:
+    cpu: 1
+    memory: 1Gi
+  requests:
+    cpu: 1
+    memory: 1Gi
+
+sparkConf:
+  spark.history.fs.logDirectory: s3a://historyserver/logs
+  spark.hadoop.fs.s3a.endpoint: http://10.132.0.62:9000
+  spark.hadoop.fs.s3a.access.key: minioadmin
+  spark.hadoop.fs.s3a.secret.key: minioadmin123
+  spark.hadoop.fs.s3a.path.style.access: true
+  spark.hadoop.fs.s3a.connection.ssl.enabled: false
+  spark.hadoop.fs.s3a.connection.establish.timeout: 60000
+  spark.hadoop.fs.s3a.connection.request.timeout: 60000
+  spark.history.fs.s3a.cleaner.enabled: true
+  spark.history.fs.cleaner.maxAge: 7d
+  spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+
+sidecars:
+  gitInitContainer:
+    enabled: false
+  s3InitContainer:
+    enabled: false
+    command:
+      - "/bin/bash"
+      - "-c"
+    args:
+      - |
+        echo "Pulling data from S3..."
+        # wget -O housing.csv https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.csv
+        cd /opt/spark/work-dir/shared/
+        aws configure set aws_access_key_id $MINIO_USERNAME
+        aws configure set aws_secret_access_key $MINIO_PASSWORD
+        aws --endpoint-url http://10.132.0.62:9000 s3 cp 911.csv s3://911/911.csv
+        echo "Data pull from S3 completed."

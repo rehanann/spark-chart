@@ -164,3 +164,7 @@ eventLogs:
   directory: s3a://spark-history-global1/logs
 
 runAsJob: false
+
+kueue:
+  enabled: false
+  localQueue: finance

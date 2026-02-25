@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.project.namespace }}
   labels:
     {{- include "spark.commonLabels" . | indent 4 }}
+    kueue.x-k8s.io/queue-name: {{ .Values.kueue.localQueue }}
 spec:
   selector:
     matchLabels:

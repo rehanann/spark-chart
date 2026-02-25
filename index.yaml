@@ -3,32 +3,52 @@ entries:
   spark:
   - apiVersion: v2
     appVersion: 3.4.5
-    created: "2025-10-03T15:49:20.131018+01:00"
+    created: "2026-02-25T01:04:01.580323Z"
+    description: A Helm chart for Kubernetes
+    digest: 91afbd8486fd6e04420e8857d895f060f31ab6ba400f57fcb5728adf7bf09eee
+    name: spark
+    type: application
+    urls:
+    - https://rehanann.github.io/spark-chart/spark-0.4.3.tgz/spark-0.4.3.tgz
+    version: 0.4.3
+  - apiVersion: v2
+    appVersion: 3.4.5
+    created: "2026-02-25T01:04:01.578719Z"
+    description: A Helm chart for Kubernetes
+    digest: 6f902ff77a57d417d7ac9176e25a9e021808ed3f81e0373cc3683daf6ad65ad9
+    name: spark
+    type: application
+    urls:
+    - https://rehanann.github.io/spark-chart/spark-0.4.3.tgz/spark-0.4.2.tgz
+    version: 0.4.2
+  - apiVersion: v2
+    appVersion: 3.4.5
+    created: "2026-02-25T01:04:01.577459Z"
     description: A Helm chart for Kubernetes
     digest: 400a0cf8163364819f3fb3eee2101224687fbb6ae8fd4f833341fb5fbf45c7a0
     name: spark
     type: application
     urls:
-    - https://rehanann.github.io/spark-chart/spark-0.4.1.tgz
+    - https://rehanann.github.io/spark-chart/spark-0.4.3.tgz/spark-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v2
     appVersion: 3.4.5
-    created: "2025-10-03T15:49:20.130007+01:00"
+    created: "2026-02-25T01:04:01.576451Z"
     description: A Helm chart for Kubernetes
     digest: 5718b0a22bb57e41f253cf39a7413f851d6714eaadb799756ae11d06090d621c
     name: spark
     type: application
     urls:
-    - https://rehanann.github.io/spark-chart/spark-0.4.0.tgz
+    - https://rehanann.github.io/spark-chart/spark-0.4.3.tgz/spark-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
     appVersion: 3.4.5
-    created: "2025-10-03T15:49:20.129188+01:00"
+    created: "2026-02-25T01:04:01.575641Z"
     description: A Helm chart for Kubernetes
     digest: 753665cfc4501234246194cf7f96ba55bc356ff9edae6a987033227db79c18b3
     name: spark
     type: application
     urls:
-    - https://rehanann.github.io/spark-chart/spark-0.3.0.tgz
+    - https://rehanann.github.io/spark-chart/spark-0.4.3.tgz/spark-0.3.0.tgz
     version: 0.3.0
-generated: "2025-10-03T15:49:20.128443+01:00"
+generated: "2026-02-25T01:04:01.57488Z"
