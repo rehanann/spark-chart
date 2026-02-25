@@ -24,6 +24,10 @@ spec:
       restartPolicy: Never
       securityContext:
         fsGroup: 185
+      nodeSelector:
+        instance-type: {{ .Values.nodeSelector.instanceType }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
       initContainers:
         {{- if .Values.sidecars.s3InitContainer.enabled }}
         {{- include "spark.s3InitContainer" . | nindent 8 }}

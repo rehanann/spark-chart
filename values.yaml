@@ -168,3 +168,9 @@ runAsJob: false
 kueue:
   enabled: false
   localQueue: finance
+
+tolerations:
+  - key: "e2-standard-8"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
